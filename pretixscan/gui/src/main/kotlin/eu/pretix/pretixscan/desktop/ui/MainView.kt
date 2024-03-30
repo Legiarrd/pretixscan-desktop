@@ -563,7 +563,7 @@ class MainView : View() {
         }
 
         timeline {
-            keyframe(Duration.seconds(30.0)) {
+            keyframe(Duration.hours(1.0)) {
                 setOnFinished {
                     removeCard(card)
                 }
@@ -574,7 +574,7 @@ class MainView : View() {
     private fun renewSearchResultLifetime() {
         hideSearchTimeline?.stop()
         hideSearchTimeline = timeline {
-            keyframe(Duration.seconds(30.0)) {
+            keyframe(Duration.hours(1.0)) {
                 setOnFinished {
                     hideSearchResultCard()
                 }
