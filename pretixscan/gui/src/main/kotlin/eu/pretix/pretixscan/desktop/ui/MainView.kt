@@ -933,14 +933,14 @@ class MainView : View() {
                                 label(data?.orderCodeAndPositionId() ?: "")
                             }
                             hbox {
-                                label(data?.shownAnswers.toString()) {
+                                label(data.shownAnswers.toString()) {
                                     isWrapText = true
                                 }
                                 spacer {}
                                 label(data?.orderCodeAndPositionId() ?: "")
                             }
                             hbox {
-                                label(data?.addonText.toString()) {
+                                label(data.toString()) {
                                     isWrapText = true
                                 }
                                 spacer {}
