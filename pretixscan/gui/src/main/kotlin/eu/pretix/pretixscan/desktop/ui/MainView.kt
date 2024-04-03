@@ -940,11 +940,10 @@ class MainView : View() {
                                 label(data?.orderCodeAndPositionId() ?: "")
                             }
                             hbox {
-                                label(data?.requiredAnswers.toString()) {
+                                label(data?.addonText.toString()) {
                                     isWrapText = true
                                 }
                                 spacer {}
-                                label(data?.orderCodeAndPositionId() ?: "")
                             }
                             if (data?.scanType != TicketCheckProvider.CheckInType.EXIT && data?.seat != null) {
                                 hbox {
