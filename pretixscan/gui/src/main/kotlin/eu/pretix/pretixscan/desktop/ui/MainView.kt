@@ -932,6 +932,13 @@ class MainView : View() {
                                 spacer {}
                                 label(data?.orderCodeAndPositionId() ?: "")
                             }
+                            hbox {
+                                label(data?.shownAnswers.toString()) {
+                                    isWrapText = true
+                                }
+                                spacer {}
+                                label(data?.orderCodeAndPositionId() ?: "")
+                            }
                             if (data?.scanType != TicketCheckProvider.CheckInType.EXIT && data?.seat != null) {
                                 hbox {
                                     label (data.seat!!) {
