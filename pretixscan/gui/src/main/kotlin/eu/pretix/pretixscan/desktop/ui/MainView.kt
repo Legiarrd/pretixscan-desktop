@@ -932,19 +932,6 @@ class MainView : View() {
                                 spacer {}
                                 label(data?.orderCodeAndPositionId() ?: "")
                             }
-                            hbox {
-                                label(data.shownAnswers.toString()) {
-                                    isWrapText = true
-                                }
-                                spacer {}
-                                label(data?.orderCodeAndPositionId() ?: "")
-                            }
-                            hbox {
-                                label(data.toString()) {
-                                    isWrapText = true
-                                }
-                                spacer {}
-                            }
                             if (data?.scanType != TicketCheckProvider.CheckInType.EXIT && data?.seat != null) {
                                 hbox {
                                     label (data.seat!!) {
@@ -962,6 +949,25 @@ class MainView : View() {
                                     }
                                 }
                             }
+
+                            val qanda = StringBuilder()
+
+                            data?.shownAnswers?.forEachIndexed { index, questionAnswer ->
+                                qanda.append(questionAnswer.question.question + ":")
+                                qanda.append(" ")
+                                qanda.append(questionAnswer.currentValue)
+                                if (index != data.shownAnswers!!.lastIndex) {
+                                    qanda.append("\n")
+                                }
+                            }
+                            if (qanda.isNotEmpty()) {
+                                hbox {
+                                    label(qanda.toString()) {
+                                        isWrapText = true
+                                    }
+                                }
+                            }
+
                             if (data?.scanType != TicketCheckProvider.CheckInType.EXIT && !data?.shownAnswers.isNullOrEmpty()) {
                                 val qanda = StringBuilder()
 
