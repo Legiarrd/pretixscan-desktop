@@ -946,21 +946,30 @@ class MainView : View() {
                                 if (questions != null) {
                                     for (i in 0 until questions.length()) {
                                         val q = questions.getJSONObject(i)
-                                        val dateRegex = Regex("\\d{4}-\\d{2}-\\d{2}")
+                                        val questionIdentifier = q.optString("question_identifier")
                                         val answer = q.optString("answer")
-                                        val formattedAnswer = if (dateRegex.matches(answer)) {
-                                            "birthday: $answer"
-                                        } else {
-                                            answer
+                                        var formattedAnswer: String? = null
+
+                                        when (questionIdentifier) {
+                                            "PYZPGEAJ" -> formattedAnswer = "nickname: $answer"
+                                            "VWMNTKM8" -> formattedAnswer = "date of birth: $answer"
+
                                         }
-                                        hbox {
-                                            label("$formattedAnswer").apply {
-                                                isWrapText = true
+
+                                        if (formattedAnswer != null) {
+                                            hbox {
+                                                label(formattedAnswer).apply {
+                                                    isWrapText = true
+                                                }
                                             }
+                                        } else {
+                                            continue // Skip to the next iteration if formattedAnswer is not set
                                         }
                                     }
                                 }
                             }
+
+
 
 
 
