@@ -933,14 +933,6 @@ class MainView : View() {
                                 label(data?.orderCodeAndPositionId() ?: "")
                             }
 
-                            hbox {
-                                label(data?.birthday.toString()) {
-                                    isWrapText = true
-                                }
-                                spacer {}
-                                label("Birthday: ")
-                            }
-
                             if (data?.scanType != TicketCheckProvider.CheckInType.EXIT && data?.seat != null) {
                                 hbox {
                                     label (data.seat!!) {
@@ -948,6 +940,30 @@ class MainView : View() {
                                     }
                                 }
                             }
+
+                            if (data?.position != null) {
+                                val questions = data.position!!.optJSONArray("answers")
+                                if (questions != null) {
+                                    for (i in 0 until questions.length()) {
+                                        val q = questions.getJSONObject(i)
+                                        val dateRegex = Regex("\\d{4}-\\d{2}-\\d{2}")
+                                        val answer = q.optString("answer")
+                                        val formattedAnswer = if (dateRegex.matches(answer)) {
+                                            "birthday: $answer"
+                                        } else {
+                                            answer
+                                        }
+                                        hbox {
+                                            label("$formattedAnswer").apply {
+                                                isWrapText = true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+
                             if (data?.position != null && data?.position?.has("pdf_data") == true) {
                                 val t = data?.position?.optJSONObject("pdf_data")?.optString("addons")?.replace("<br/>", ", ")
                                 if (t?.isNotEmpty() == true) {
